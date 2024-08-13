@@ -1,12 +1,13 @@
-ADD apple 60 2.00
-ADD banana 40 1.50
-SELL apple 30 3.50
-SELL banana 20 2.50
-DONATE apple 10
-WRITEOFF banana 5
-ADD orange 30 1.20
-SELL orange 10 2.40
-DONATE orange 5
-WRITEOFF apple 5
+ADD Drill 60 50.00
+ADD Saw 40 75.00
+RENT Drill 30 5.00 7
+RENT Saw 20 7.00 10
+RETURN_DAMAGED Drill 10 60.00
+DISCARD Saw 5
+ADD Hammer 30 30.00
+RENT Hammer 10 6.00 5
+RETURN Hammer 5 5
+RETURN_DAMAGED Hammer 5 40.00
+DISCARD Drill 5
 CHECK
 PROFIT

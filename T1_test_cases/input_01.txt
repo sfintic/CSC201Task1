@@ -1,12 +1,12 @@
-ADD apple 100 2.00
-SELL apple 20 3.50
-ADD banana 50 1.50
-SELL banana 10 2.50
-SELL apple 30 4.00
-SELL banana 20 3.00
-SELL apple 10 5.00
-SELL banana 5 2.50
-ADD apple 50 1.80
-SELL apple 40 2.50
+ADD Drill 100 50.00
+RENT Drill 20 5.00 7
+ADD Saw 50 75.00
+RENT Saw 10 7.00 10
+RENT Drill 30 6.00 5
+RENT Saw 20 8.00 7
+RENT Drill 10 7.00 10
+RENT Saw 5 7.50 8
+ADD Drill 50 45.00
+RENT Drill 40 6.50 6
 CHECK
 PROFIT
