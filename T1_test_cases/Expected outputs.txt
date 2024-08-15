@@ -2,7 +2,7 @@
 
 input_01.txt
 ~~~~~~~~~~~~~
-Drill: 60
+Drill: 50
 Saw: 15
 Profit/Loss: $0.00
 
