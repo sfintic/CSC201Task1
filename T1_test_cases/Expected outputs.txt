@@ -44,6 +44,6 @@ input_06.txt
 Drill: 30
 Saw: 25
 Hammer: 25
-Profit/Loss: $875.00
+Profit/Loss: $1275.00
 
 
