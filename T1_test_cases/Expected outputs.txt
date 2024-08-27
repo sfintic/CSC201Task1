@@ -20,7 +20,7 @@ input_03.txt
 ~~~~~~~~~~~~~
 Drill: 9
 Saw: 3
-Profit/Loss: $92.50
+Profit/Loss: $127.50
 
 
 
