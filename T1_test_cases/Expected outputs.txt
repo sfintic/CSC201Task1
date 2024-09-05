@@ -36,7 +36,7 @@ Profit/Loss: -$445.00
 input_05.txt
 ~~~~~~~~~~~~~
 Drill: 30
-Profit/Loss: NA 	# if the ouput is NA, the number of items does not matter
+Profit/Loss: NA 	# if the output is NA, the number of items does not matter
 
 
 input_06.txt
