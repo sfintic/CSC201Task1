@@ -1,9 +1,8 @@
+//Solo Fintic
 package au.edu.usc;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
 
 public class InventoryManager {
 
@@ -30,7 +29,7 @@ public class InventoryManager {
     public void addTool(String toolName, int quantity, double acquisitionCost) {
         inventory.putIfAbsent(toolName, new LinkedList<>());
         for (int i = 0; i < quantity; i++) {
-            inventory.get(toolName).add(acquisitionCost);
+            inventory.get(toolName).add(acquisitionCost);  // Add the acquisition cost to the inventory
         }
     }
 
@@ -46,11 +45,11 @@ public class InventoryManager {
 
         double totalIncome = 0;
         for (int i = 0; i < quantity; i++) {
-            toolList.remove(0);  // Remove rented tools from inventory
+            // Tools are selected for rental, but they remain in the inventory
             rentals.add(new Rental(1, rentFeePerDay, rentDays));  // Store rental details
-            totalIncome += rentFeePerDay * rentDays;
+            totalIncome += rentFeePerDay * rentDays;  // Calculate rental income
         }
-        return totalIncome;  // Income from renting
+        return totalIncome;  // Return the total rental income
     }
 
     // Return tools to inventory and calculate surcharges
@@ -66,42 +65,46 @@ public class InventoryManager {
             Rental rental = rentals.removeFirst();  // Get the earliest rented tool
             double surcharge = 0;
 
-            // Calculate surcharge based on early or late return
+            // Case 1: Early return
             if (daysRented < rental.rentDays) {
-                surcharge = 0.30 * rental.rentFeePerDay * (rental.rentDays - daysRented);  // Early return
-            } else if (daysRented > rental.rentDays) {
-                surcharge = 0.50 * rental.rentFeePerDay * (daysRented - rental.rentDays);  // Late return
+                surcharge = 0.30 * rental.rentFeePerDay * (rental.rentDays - daysRented);
+            }
+            // Case 2: Return on time (no surcharge)
+            else if (daysRented == rental.rentDays) {
+                surcharge = 0;  // No surcharge for returning on time
+            }
+            // Case 3: Late return
+            else {
+                surcharge = 0.50 * rental.rentFeePerDay * (daysRented - rental.rentDays);
             }
 
-            // Return the tool to inventory
-            toolList.add(50.00);  // Add returned tools back to inventory (dummy acquisition cost)
-
+            // Tools remain in inventory
             totalSurcharge += surcharge;
         }
 
-        return totalSurcharge;  // Return total surcharge for early/late returns
+        return totalSurcharge;  // Return the total surcharge for early/late returns
     }
 
     // Return damaged tools and charge replacement cost
     public double returnDamagedTool(String toolName, int quantity, double replacementCost) {
         LinkedList<Double> toolList = inventory.get(toolName);
         if (toolList == null || toolList.size() < quantity) {
-            return -1;
+            return -1;  // Invalid return request
         }
 
         for (int i = 0; i < quantity; i++) {
-            toolList.remove(0);  // Remove damaged tools
+            toolList.remove(0);  // Remove damaged tools (FIFO)
         }
 
         double totalReplacementCost = replacementCost * quantity;
-        return totalReplacementCost;  // Loss due to damaged tools
+        return totalReplacementCost;  // Charge the replacement cost for damaged tools
     }
 
     // Discard tools from inventory and calculate acquisition cost loss
     public double discardTool(String toolName, int quantity) {
         LinkedList<Double> toolList = inventory.get(toolName);
         if (toolList == null || toolList.size() < quantity) {
-            return -1;
+            return -1;  // Not enough tools to discard
         }
 
         double totalDiscardCost = 0;
@@ -109,7 +112,7 @@ public class InventoryManager {
             totalDiscardCost += toolList.remove(0);  // Add acquisition cost to total loss
         }
 
-        return totalDiscardCost;  // Return acquisition cost of discarded tools
+        return totalDiscardCost;  // Return the acquisition cost of discarded tools
     }
 
     // Display the current inventory
